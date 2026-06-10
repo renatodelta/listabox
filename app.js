@@ -199,6 +199,17 @@ function initData() {
     state.schools = JSON.parse(localStorage.getItem("listabox_schools"));
     state.lists = JSON.parse(localStorage.getItem("listabox_lists"));
     state.orders = JSON.parse(localStorage.getItem("listabox_orders"));
+    
+    // Ensure cart state is fully initialized
+    state.cart = {
+        lists: [],
+        items: [],
+        listId: null,
+        isCustom: false,
+        total: 0,
+        promoDiscount: 0,
+        promoCode: ""
+    };
 }
 
 function saveData(key, data) {
@@ -705,6 +716,9 @@ function updateCartTotals() {
     let total = subtotal - discount;
     if (total < 0) total = 0;
 
+    state.cart.total = total;
+    state.cart.items = lists.flatMap(l => l.items);
+
     document.getElementById("cart-summary-subtotal").textContent = formatCurrency(subtotal);
     document.getElementById("cart-summary-total").textContent = formatCurrency(total);
 
@@ -789,27 +803,40 @@ function handleCheckoutSubmit(event) {
 
     const orderId = `LBOX-${Math.floor(1000 + Math.random() * 9000)}`;
 
-    const list = state.selectedList;
-    const school = state.schools.find(s => s.id === list.schoolId);
+    const lists = state.cart.lists || [];
+    const schoolName = lists.map(l => l.schoolName).filter((v, i, a) => a.indexOf(v) === i).join(" + ") || "Outro";
+    const gradeName = lists.map(l => l.grade).filter((v, i, a) => a.indexOf(v) === i).join(" + ") || "Geral";
 
     const newOrder = {
         id: orderId,
         parentName,
         studentName,
-        schoolName: school ? school.name : "Outro",
-        gradeName: list.grade,
+        schoolName: schoolName,
+        gradeName: gradeName,
         phone,
         address,
         paymentMethod,
         total: state.cart.total,
         status: "received",
         date: new Date().toISOString(),
-        items: state.cart.items.map(i => i.name)
+        items: lists.flatMap(l => l.items).map(i => `${i.name} (x${i.quantity})`)
     };
 
     // Add order to global list and update localStorage
     state.orders.push(newOrder);
     saveData("listabox_orders", state.orders);
+
+    // Clear cart after checkout
+    state.cart = {
+        lists: [],
+        items: [],
+        listId: null,
+        isCustom: false,
+        total: 0,
+        promoDiscount: 0,
+        promoCode: ""
+    };
+    updateCartBadge();
 
     // Show Success screen with Pix instruction or generic confirmation
     showSuccessScreen(newOrder);
@@ -904,25 +931,50 @@ function renderAdmin() {
     // Nav highlight
     const tabLists = document.getElementById("admin-tab-lists");
     const tabOrders = document.getElementById("admin-tab-orders");
+    const tabSchools = document.getElementById("admin-tab-schools");
 
     if (state.adminActiveTab === "lists") {
         tabLists.classList.add("border-primary", "text-primary");
         tabLists.classList.remove("border-transparent", "text-on-surface-variant");
         tabOrders.classList.remove("border-primary", "text-primary");
         tabOrders.classList.add("border-transparent", "text-on-surface-variant");
+        if (tabSchools) {
+            tabSchools.classList.remove("border-primary", "text-primary");
+            tabSchools.classList.add("border-transparent", "text-on-surface-variant");
+        }
 
         document.getElementById("admin-lists-section").classList.remove("hidden");
         document.getElementById("admin-orders-section").classList.add("hidden");
+        document.getElementById("admin-schools-section").classList.add("hidden");
         renderAdminLists();
-    } else {
+    } else if (state.adminActiveTab === "orders") {
         tabOrders.classList.add("border-primary", "text-primary");
         tabOrders.classList.remove("border-transparent", "text-on-surface-variant");
         tabLists.classList.remove("border-primary", "text-primary");
         tabLists.classList.add("border-transparent", "text-on-surface-variant");
+        if (tabSchools) {
+            tabSchools.classList.remove("border-primary", "text-primary");
+            tabSchools.classList.add("border-transparent", "text-on-surface-variant");
+        }
 
         document.getElementById("admin-lists-section").classList.add("hidden");
         document.getElementById("admin-orders-section").classList.remove("hidden");
+        document.getElementById("admin-schools-section").classList.add("hidden");
         renderAdminOrders();
+    } else if (state.adminActiveTab === "schools") {
+        if (tabSchools) {
+            tabSchools.classList.add("border-primary", "text-primary");
+            tabSchools.classList.remove("border-transparent", "text-on-surface-variant");
+        }
+        tabLists.classList.remove("border-primary", "text-primary");
+        tabLists.classList.add("border-transparent", "text-on-surface-variant");
+        tabOrders.classList.remove("border-primary", "text-primary");
+        tabOrders.classList.add("border-transparent", "text-on-surface-variant");
+
+        document.getElementById("admin-lists-section").classList.add("hidden");
+        document.getElementById("admin-orders-section").classList.add("hidden");
+        document.getElementById("admin-schools-section").classList.remove("hidden");
+        renderAdminSchools();
     }
 }
 
@@ -1187,6 +1239,85 @@ function deleteAdminItem(itemId) {
 
     saveData("listabox_lists", state.lists);
     renderAdminListItems();
+}
+
+// SCHOOL MANAGEMENT FUNCTIONS
+
+function renderAdminSchools() {
+    const container = document.getElementById("admin-schools-container");
+    container.innerHTML = "";
+
+    state.schools.forEach(school => {
+        // Count lists associated with this school
+        const listsCount = state.lists.filter(l => l.schoolId === school.id).length;
+
+        container.innerHTML += `
+            <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm flex flex-col md:flex-row justify-between gap-md items-center">
+                <div>
+                    <span class="bg-primary-fixed text-primary px-sm py-xs rounded text-body-sm font-semibold mr-xs">
+                        ID: ${school.id}
+                    </span>
+                    <h4 class="font-headline-sm text-headline-sm text-primary mt-xs">${school.name}</h4>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">${listsCount} listas de material vinculadas</p>
+                </div>
+                <div>
+                    <button onclick="deleteSchool('${school.id}')" class="bg-error-container text-on-error-container p-sm rounded-lg hover:opacity-95 transition-opacity flex items-center gap-xs font-button text-body-sm">
+                        <span class="material-symbols-outlined">delete</span> Remover Escola
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function openAddSchoolModal() {
+    document.getElementById("admin-school-modal").classList.remove("hidden");
+    document.getElementById("admin-school-modal").classList.add("flex");
+}
+
+function closeAddSchoolModal() {
+    document.getElementById("admin-school-modal").classList.add("hidden");
+    document.getElementById("admin-school-modal").classList.remove("flex");
+    // Clear inputs
+    document.getElementById("admin-school-id").value = "";
+    document.getElementById("admin-school-name").value = "";
+}
+
+function handleAddSchoolSubmit(event) {
+    event.preventDefault();
+
+    const id = document.getElementById("admin-school-id").value.trim().toLowerCase();
+    const name = document.getElementById("admin-school-name").value.trim();
+
+    if (!id || !name) return;
+
+    // Check if ID already exists
+    if (state.schools.some(s => s.id === id)) {
+        alert("Já existe uma escola cadastrada com este identificador único.");
+        return;
+    }
+
+    const newSchool = { id, name };
+    state.schools.push(newSchool);
+    saveData("listabox_schools", state.schools);
+
+    closeAddSchoolModal();
+    renderAdmin();
+}
+
+function deleteSchool(schoolId) {
+    // Check if there are lists associated with this school
+    const hasLists = state.lists.some(l => l.schoolId === schoolId);
+    if (hasLists) {
+        alert("Não é possível remover esta escola pois existem listas de material associadas a ela. Remova as listas primeiro.");
+        return;
+    }
+
+    if (confirm("Tem certeza que deseja remover esta escola parceira?")) {
+        state.schools = state.schools.filter(s => s.id !== schoolId);
+        saveData("listabox_schools", state.schools);
+        renderAdmin();
+    }
 }
 
 // Window Onload initializer

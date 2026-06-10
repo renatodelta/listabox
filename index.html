@@ -215,6 +215,13 @@
                         </div>
                     </div>
 
+                    <!-- Specifications Card -->
+                    <div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant grid grid-cols-1 md:grid-cols-3 gap-sm">
+                        <div id="spec-institution" class="flex items-center gap-xs font-body-sm text-body-sm text-primary font-semibold"></div>
+                        <div id="spec-grade" class="flex items-center gap-xs font-body-sm text-body-sm text-primary font-semibold"></div>
+                        <div id="spec-year" class="flex items-center gap-xs font-body-sm text-body-sm text-primary font-semibold"></div>
+                    </div>
+
                     <!-- Highlights -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
                         <div class="bg-surface-container-low p-sm rounded-xl border border-outline-variant flex items-start gap-sm">
@@ -251,6 +258,7 @@
                             <button onclick="filterCategory('art')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-art">Artes</button>
                             <button onclick="filterCategory('writing')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-writing">Escrita</button>
                             <button onclick="filterCategory('notebook')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-notebook">Cadernos</button>
+                            <button onclick="filterCategory('others')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-others">Outros</button>
                         </div>
                     </div>
 
@@ -635,6 +643,7 @@
             <div class="flex border-b border-outline-variant">
                 <button id="admin-tab-lists" onclick="setAdminTab('lists')" class="px-lg py-sm border-b-2 font-headline-sm text-headline-sm font-semibold transition-all">Listas de Material</button>
                 <button id="admin-tab-orders" onclick="setAdminTab('orders')" class="px-lg py-sm border-b-2 font-headline-sm text-headline-sm font-semibold transition-all">Pedidos Recebidos</button>
+                <button id="admin-tab-schools" onclick="setAdminTab('schools')" class="px-lg py-sm border-b-2 font-headline-sm text-headline-sm font-semibold transition-all">Escolas Parceiras</button>
             </div>
 
             <!-- Tab content: Lists Manager -->
@@ -655,6 +664,19 @@
             <div id="admin-orders-section" class="hidden space-y-md">
                 <h3 class="font-headline-sm text-headline-sm text-primary">Pedidos de Pais e Responsáveis</h3>
                 <div id="admin-orders-container" class="space-y-md">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+            
+            <!-- Tab content: Schools Manager -->
+            <div id="admin-schools-section" class="hidden space-y-md">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-headline-sm text-headline-sm text-primary">Escolas Parceiras Cadastradas</h3>
+                    <button onclick="openAddSchoolModal()" class="bg-primary text-on-primary px-md py-sm rounded-lg flex items-center gap-xs font-button text-button hover:opacity-95">
+                        <span class="material-symbols-outlined">add</span> Nova Escola
+                    </button>
+                </div>
+                <div id="admin-schools-container" class="grid grid-cols-1 gap-sm">
                     <!-- Loaded dynamically -->
                 </div>
             </div>
@@ -697,6 +719,29 @@
                 </div>
                 <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg hover:opacity-95 shadow-sm mt-md">
                     Criar Lista de Material
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add New School -->
+    <div id="admin-school-modal" class="fixed inset-0 bg-black/50 z-50 items-center justify-center hidden p-md">
+        <div class="bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant shadow-xl max-w-md w-full space-y-md">
+            <div class="flex justify-between items-center border-b border-outline-variant pb-xs">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Cadastrar Nova Escola</h3>
+                <button onclick="closeAddSchoolModal()" class="material-symbols-outlined hover:bg-surface-variant rounded-full p-1 text-on-surface-variant">close</button>
+            </div>
+            <form onsubmit="handleAddSchoolSubmit(event)" class="space-y-sm">
+                <div>
+                    <label class="block text-label-md font-bold text-primary mb-xs">Identificador Único (Ex: objetivo, anglo)</label>
+                    <input type="text" id="admin-school-id" required placeholder="Ex: anglo" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-sm">
+                </div>
+                <div>
+                    <label class="block text-label-md font-bold text-primary mb-xs">Nome da Escola</label>
+                    <input type="text" id="admin-school-name" required placeholder="Ex: Colégio Anglo" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-sm">
+                </div>
+                <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg hover:opacity-95 shadow-sm mt-md">
+                    Cadastrar Escola
                 </button>
             </form>
         </div>
