@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ListaBox - Kits de Material Escolar Prontos</title>
+    <!-- Tailwind CSS with Forms and Container Queries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#705e00",
+                        "on-primary-fixed": "#000767",
+                        "secondary-fixed": "#ffe16e",
+                        "tertiary-fixed": "#98f994",
+                        "on-surface": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-dim": "#dadada",
+                        "tertiary": "#002104",
+                        "surface-tint": "#4c56af",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e0e0ff",
+                        "outline-variant": "#c6c5d4",
+                        "background": "#f9f9f9",
+                        "on-primary-container": "#8690ee",
+                        "on-primary-fixed-variant": "#343d96",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container": "#eeeeee",
+                        "on-surface-variant": "#454652",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-primary": "#bdc2ff",
+                        "on-secondary-fixed-variant": "#544600",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#000666",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-background": "#1a1c1c",
+                        "secondary-container": "#fdd835",
+                        "primary-container": "#1a237e",
+                        "surface": "#f9f9f9",
+                        "outline": "#767683",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "on-secondary-fixed": "#221b00",
+                        "secondary-fixed-dim": "#e8c41d",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#7ddc7a",
+                        "on-tertiary-container": "#4eab50",
+                        "on-tertiary-fixed": "#002204",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "tertiary-container": "#00390a",
+                        "secondary": "#705d00",
+                        "surface-variant": "#e2e2e2",
+                        "inverse-surface": "#2f3131",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "button": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["16px", {"lineHeight": "1.0", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "1.0", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "1.0", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col min-h-screen pb-20 md:pb-0">
+
+    <!-- Top Navigation Header -->
+    <header class="w-full top-0 sticky z-50 bg-surface/90 shadow-[0px_4px_12px_rgba(26,35,126,0.06)] border-b border-outline-variant">
+        <div class="flex justify-between items-center px-gutter py-sm w-full max-w-container-max mx-auto">
+            <div onclick="setView('home')" class="flex items-center gap-sm cursor-pointer select-none">
+                <span class="material-symbols-outlined text-primary text-[28px]">inventory_2</span>
+                <h1 class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">Lista<span class="text-secondary-container bg-primary px-1.5 rounded-lg ml-0.5">Box</span></h1>
+            </div>
+            <div class="flex items-center gap-md">
+                <button id="header-cart-btn" onclick="openCartView()" class="relative material-symbols-outlined text-primary hover:bg-surface-variant transition-colors p-2 rounded-full active:scale-95 transition-transform duration-200">
+                    shopping_cart
+                    <span id="cart-badge" class="absolute top-0 right-0 bg-error text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
+                <button id="header-admin-btn" onclick="toggleAdminView()" class="flex items-center bg-secondary-container text-on-secondary-container px-4 py-2 rounded-xl text-button font-button shadow-sm hover:scale-95 transition-all duration-200">
+                    <span class="material-symbols-outlined mr-1 text-[20px]">admin_panel_settings</span> Painel
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN VIEWS -->
+    <main class="max-w-container-max w-full mx-auto px-gutter py-lg flex-grow">
+
+        <!-- VIEW 1: HOME (Landing & List Selection) -->
+        <div id="view-home" class="app-view space-y-lg">
+            <!-- Hero Banner -->
+            <div class="relative bg-primary-container text-on-primary-fixed p-lg rounded-2xl overflow-hidden shadow-md flex flex-col md:flex-row items-center justify-between gap-md">
+                <div class="space-y-sm z-10 max-w-xl">
+                    <span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-md text-label-md">Volta às Aulas Sem Estresse!</span>
+                    <h2 class="font-headline-lg text-headline-lg font-extrabold text-white">Compre o kit escolar do seu filho em minutos</h2>
+                    <p class="font-body-md text-body-md text-slate-200">Nós pegamos a lista de materiais solicitada pela escola e entregamos tudo pronto, com os melhores preços e no conforto da sua casa.</p>
+                </div>
+                <div class="shrink-0 w-48 h-48 bg-white/10 rounded-full flex items-center justify-center border border-white/20">
+                    <span class="material-symbols-outlined text-[96px] text-secondary-container">school</span>
+                </div>
+            </div>
+
+            <!-- Search Panel -->
+            <div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant grid grid-cols-1 md:grid-cols-3 gap-md">
+                <div>
+                    <label class="block text-label-lg font-bold text-primary mb-xs">Escola</label>
+                    <select id="search-school" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-md"></select>
+                </div>
+                <div>
+                    <label class="block text-label-lg font-bold text-primary mb-xs">Série</label>
+                    <select id="search-grade" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-md"></select>
+                </div>
+                <div>
+                    <label class="block text-label-lg font-bold text-primary mb-xs">Buscar lista por palavra-chave</label>
+                    <div class="relative">
+                        <input type="text" id="search-text" placeholder="Ex: Anglo, Objetivo, Maternal..." class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary pl-10 text-body-md">
+                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-outline">search</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lists Display -->
+            <div class="space-y-sm">
+                <h3 class="font-headline-md text-headline-md text-primary">Listas Disponíveis</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Selecione a lista do seu colégio para personalizar e comprar seu kit.</p>
+                
+                <div id="home-lists-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md pt-sm">
+                    <!-- Loaded dynamically via app.js -->
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: LIST DETAIL (Interactive Supply List) -->
+        <div id="view-list-detail" class="app-view hidden space-y-lg">
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center gap-xs text-on-surface-variant text-body-sm">
+                <span onclick="setView('home')" class="hover:underline cursor-pointer font-semibold">Home</span>
+                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                <span class="text-on-surface-variant" id="detail-breadcrumb-school">Escola</span>
+                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                <span class="font-bold text-primary" id="detail-breadcrumb-list">Lista</span>
+            </nav>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+                <!-- Left Column: Media & List Items -->
+                <div class="lg:col-span-7 space-y-md">
+                    <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+                        <div class="aspect-[16/10] w-full bg-surface-container relative">
+                            <img id="detail-cover-img" class="w-full h-full object-cover" src="" alt="Kit escolar">
+                            <div class="absolute top-sm right-sm">
+                                <span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-md text-label-md shadow-sm">Lista Oficial Verificada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlights -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+                        <div class="bg-surface-container-low p-sm rounded-xl border border-outline-variant flex items-start gap-sm">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            <div>
+                                <p class="font-label-lg text-label-lg text-primary">100% Compatível</p>
+                                <p class="font-body-sm text-body-sm">De acordo com a solicitação escolar</p>
+                            </div>
+                        </div>
+                        <div class="bg-surface-container-low p-sm rounded-xl border border-outline-variant flex items-start gap-sm">
+                            <span class="material-symbols-outlined text-primary">check_circle</span>
+                            <div>
+                                <p class="font-label-lg text-label-lg text-primary">Marcas Premium</p>
+                                <p class="font-body-sm text-body-sm">Segurança e durabilidade</p>
+                            </div>
+                        </div>
+                        <div class="bg-surface-container-low p-sm rounded-xl border border-outline-variant flex items-start gap-sm">
+                            <span class="material-symbols-outlined text-primary">local_shipping</span>
+                            <div>
+                                <p class="font-label-lg text-label-lg text-primary">Entrega Expressa</p>
+                                <p class="font-body-sm text-body-sm">Pronto para envio em até 24h</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Filters -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md border-t border-outline-variant pt-md">
+                        <div>
+                            <h3 class="font-headline-sm text-headline-sm text-primary">Lista Detalhada de Itens</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Selecione ou desmarque os itens conforme o que você já possui em casa.</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-xs bg-surface-container-high p-xs rounded-full mt-2 md:mt-0">
+                            <button onclick="filterCategory('all')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-all">Todos</button>
+                            <button onclick="filterCategory('art')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-art">Artes</button>
+                            <button onclick="filterCategory('writing')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-writing">Escrita</button>
+                            <button onclick="filterCategory('notebook')" class="px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200" id="tab-notebook">Cadernos</button>
+                        </div>
+                    </div>
+
+                    <!-- Items Grid -->
+                    <div id="detail-items-grid" class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+                        <!-- Loaded dynamically via app.js -->
+                    </div>
+                </div>
+
+                <!-- Right Column: Buying Cards -->
+                <div class="lg:col-span-5 space-y-md sticky top-[80px]">
+                    
+                    <!-- Buy Full Bundle Card -->
+                    <div class="bg-surface-container-lowest p-gutter rounded-xl shadow-md border border-outline-variant relative overflow-hidden">
+                        <div class="absolute -top-4 -right-4 bg-secondary-container text-on-secondary-container py-2 px-6 rotate-12 font-bold text-[12px] shadow-sm">
+                            MELHOR PREÇO
+                        </div>
+                        <div class="mb-md">
+                            <h2 class="font-headline-md text-headline-md text-primary mb-xs" id="detail-title">Nome da Lista</h2>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant" id="detail-desc">Breve descrição da lista escolar carregada.</p>
+                        </div>
+                        <div class="space-y-sm mb-lg">
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Preço do Kit Completo</p>
+                                    <p class="font-headline-lg text-headline-lg text-primary font-extrabold" id="detail-bundle-price">R$ 0,00</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-body-sm text-body-sm text-red-500 line-through" id="detail-original-price">R$ 0,00</p>
+                                    <p class="font-label-lg text-label-lg text-tertiary-container bg-tertiary/10 px-sm py-xs rounded font-bold" id="detail-savings-badge">Economize 12%</p>
+                                </div>
+                            </div>
+                            <div class="bg-surface-container p-sm rounded-lg flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-on-secondary-container">inventory_2</span>
+                                <p class="font-body-sm text-body-sm text-on-surface" id="detail-item-count-badge">Carregando itens...</p>
+                            </div>
+                        </div>
+                        <div class="space-y-sm">
+                            <button onclick="buyBundle()" class="w-full bg-primary text-on-primary font-button text-button py-md rounded-lg flex justify-center items-center gap-sm hover:bg-primary-container transition-all active:scale-95 shadow-sm">
+                                <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                                Comprar Kit Completo com Desconto
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Custom Total Sticky Bar -->
+                    <div class="bg-surface-container-lowest p-gutter rounded-xl border border-outline-variant shadow-sm space-y-md">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-label-md text-label-md text-on-surface-variant" id="custom-total-label">Total dos Itens Selecionados</p>
+                                <p class="font-headline-sm text-headline-sm text-primary font-bold" id="custom-total-price">R$ 0,00</p>
+                            </div>
+                            <span class="material-symbols-outlined text-[36px] text-primary">calculate</span>
+                        </div>
+                        <button id="add-custom-cart-btn" onclick="buyCustom()" class="w-full bg-secondary-container text-on-secondary-container font-button text-button py-md rounded-lg flex justify-center items-center gap-sm hover:translate-y-[-2px] transition-all active:scale-95 border border-secondary">
+                            <span class="material-symbols-outlined">playlist_add</span>
+                            Comprar Seleção Customizada
+                        </button>
+                    </div>
+
+                    <!-- Trust Card -->
+                    <div class="bg-primary-container text-on-primary-fixed p-sm rounded-xl flex items-center gap-md">
+                        <div class="bg-on-primary-container p-sm rounded-full text-white">
+                            <span class="material-symbols-outlined">security</span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-white">
+                            <strong>Garantia de Devolução:</strong> Caso algum item não seja aceito pela escola ou não atenda ao solicitado, fazemos a troca sem custos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2.5: CART (Review Cart) -->
+        <div id="view-cart" class="app-view hidden space-y-lg">
+            <!-- Breadcrumb & Progress Stepper -->
+            <div class="mb-lg">
+                <div class="flex items-center gap-xs text-on-surface-variant mb-md">
+                    <span onclick="setView('home')" class="font-label-md text-label-md hover:underline cursor-pointer">Home</span>
+                    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                    <span class="font-label-md text-label-md text-primary font-bold">Carrinho de Compras</span>
+                </div>
+                
+                <div class="flex items-center w-full max-w-2xl mx-auto mb-lg">
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center mb-xs">
+                            <span class="material-symbols-outlined text-sm">check</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-primary">Escolher Lista</span>
+                    </div>
+                    <div class="h-[2px] flex-1 bg-primary"></div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center mb-xs ring-4 ring-primary-fixed">
+                            <span class="font-label-md text-label-md">2</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-primary font-bold">Revisar Carrinho</span>
+                    </div>
+                    <div class="h-[2px] flex-1 bg-surface-container-highest"></div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center mb-xs">
+                            <span class="font-label-md text-label-md">3</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-on-surface-variant">Pagamento</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+                <!-- Cart Items Section -->
+                <div class="lg:col-span-8 space-y-md">
+                    <h2 class="font-headline-sm text-headline-sm mb-sm flex items-center gap-sm">
+                        Itens no seu Carrinho <span id="cart-items-count-badge" class="bg-primary-fixed text-primary px-3 py-0.5 rounded-full text-label-md font-bold">0 Itens</span>
+                    </h2>
+                    
+                    <div id="cart-lists-container" class="space-y-md">
+                        <!-- Loaded dynamically grouped by school lists -->
+                    </div>
+                </div>
+
+                <!-- Order Summary Sidebar -->
+                <div class="lg:col-span-4 sticky top-28">
+                    <div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(26,35,126,0.08)] p-md border border-surface-variant">
+                        <h2 class="font-headline-sm text-headline-sm mb-md text-primary">Resumo do Pedido</h2>
+                        
+                        <div class="space-y-sm mb-lg">
+                            <div class="flex justify-between text-on-surface-variant">
+                                <span class="font-body-md text-body-md">Subtotal</span>
+                                <span id="cart-summary-subtotal" class="font-body-md text-body-md">R$ 0,00</span>
+                            </div>
+                            <div class="flex justify-between text-on-surface-variant">
+                                <span class="font-body-md text-body-md">Frete Estimado</span>
+                                <span class="font-body-md text-body-md text-green-600 font-bold">GRÁTIS</span>
+                            </div>
+                            <div class="flex justify-between text-on-surface-variant">
+                                <span class="font-body-md text-body-md">Taxa de Embalagem</span>
+                                <span class="font-body-md text-body-md text-green-600 font-bold">GRÁTIS</span>
+                            </div>
+                            <div class="h-[1px] bg-surface-variant my-md"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-headline-sm text-headline-sm">Total</span>
+                                <span id="cart-summary-total" class="font-headline-md text-headline-md text-primary font-bold">R$ 0,00</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-sm">
+                            <button id="cart-checkout-btn" onclick="goToCheckout()" class="w-full bg-primary text-on-primary py-4 rounded-xl font-button text-button flex items-center justify-center gap-sm active:scale-95 transition-all duration-200 shadow-md hover:bg-primary-container">
+                                Continuar para Pagamento
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                            <button id="cart-continue-btn" onclick="setView('home')" class="w-full border-2 border-primary text-primary py-4 rounded-xl font-button text-button hover:bg-primary/5 transition-colors">
+                                Continuar Comprando
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Promotions Section -->
+                    <div class="mt-md bg-white p-md rounded-xl shadow-[0px_4px_12px_rgba(26,35,126,0.08)]">
+                        <label class="font-label-lg text-label-lg block mb-sm">Cupom de Desconto</label>
+                        <div class="flex gap-sm">
+                            <input id="cart-promo-input" class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg px-sm py-2 font-body-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Digite seu cupom" type="text"/>
+                            <button id="cart-promo-apply-btn" onclick="applyPromoCode()" class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-label-lg hover:brightness-95 transition-all">Aplicar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: CHECKOUT (Parent Checkout details) -->
+        <div id="view-checkout" class="app-view hidden space-y-lg">
+            <h2 class="font-headline-lg text-headline-lg text-primary font-extrabold">Finalizar Pedido</h2>
+            
+            <form onsubmit="handleCheckoutSubmit(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+                <!-- Left Details Form -->
+                <div class="lg:col-span-7 bg-surface-container-lowest p-gutter rounded-xl border border-outline-variant shadow-sm space-y-md">
+                    <h3 class="font-headline-sm text-headline-sm text-primary border-b border-outline-variant pb-sm">Dados de Entrega e Aluno</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                        <div>
+                            <label class="block text-label-md font-bold text-primary mb-xs">Nome do Responsável</label>
+                            <input type="text" id="client-parent-name" required placeholder="Seu nome completo" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-sm">
+                        </div>
+                        <div>
+                            <label class="block text-label-md font-bold text-primary mb-xs">WhatsApp para Contato</label>
+                            <input type="tel" id="client-phone" required placeholder="(11) 99999-9999" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                        <div>
+                            <label class="block text-label-md font-bold text-primary mb-xs">Nome do Aluno</label>
+                            <input type="text" id="client-student-name" required placeholder="Nome do estudante" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-sm">
+                        </div>
+                        <div>
+                            <label class="block text-label-md font-bold text-primary mb-xs">Escola & Série</label>
+                            <div class="w-full rounded-lg bg-surface-container-low border border-outline-variant px-sm py-2 font-medium text-body-sm text-primary" id="checkout-school-info">Anglo - Infantil</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Endereço de Entrega Completo</label>
+                        <input type="text" id="client-address" required placeholder="Rua, número, complemento, bairro, cidade" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-sm">
+                    </div>
+
+                    <h3 class="font-headline-sm text-headline-sm text-primary border-b border-outline-variant pb-sm pt-md">Forma de Pagamento</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+                        <label class="border border-outline-variant p-sm rounded-lg flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <input type="radio" name="payment_method" value="pix" checked class="text-primary focus:ring-primary">
+                            <div>
+                                <p class="font-bold text-primary">Pix</p>
+                                <p class="text-[12px] text-on-surface-variant">Aprovação imediata</p>
+                            </div>
+                        </label>
+                        <label class="border border-outline-variant p-sm rounded-lg flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <input type="radio" name="payment_method" value="credit" class="text-primary focus:ring-primary">
+                            <div>
+                                <p class="font-bold text-primary">Cartão de Crédito</p>
+                                <p class="text-[12px] text-on-surface-variant">Parcelamento em até 6x</p>
+                            </div>
+                        </label>
+                        <label class="border border-outline-variant p-sm rounded-lg flex items-center gap-sm cursor-pointer hover:bg-surface-container-low transition-colors">
+                            <input type="radio" name="payment_method" value="boleto" class="text-primary focus:ring-primary">
+                            <div>
+                                <p class="font-bold text-primary">Boleto Bancário</p>
+                                <p class="text-[12px] text-on-surface-variant">1 a 2 dias úteis</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Right Review Summary -->
+                <div class="lg:col-span-5 bg-surface-container-lowest p-gutter rounded-xl border border-outline-variant shadow-sm space-y-md h-fit">
+                    <h3 class="font-headline-sm text-headline-sm text-primary">Resumo do Pedido</h3>
+                    
+                    <div id="checkout-summary-items" class="max-h-60 overflow-y-auto space-y-xs pr-xs">
+                        <!-- Loaded dynamically -->
+                    </div>
+
+                    <div class="space-y-sm pt-sm border-t border-outline-variant">
+                        <div class="flex justify-between items-center text-body-sm">
+                            <span class="text-on-surface-variant">Soma dos Itens</span>
+                            <span class="text-primary" id="checkout-subtotal">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-body-sm">
+                            <span class="text-on-surface-variant">Desconto de Kit</span>
+                            <span class="text-green-600 font-bold" id="checkout-discount">- R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-body-sm">
+                            <span class="text-on-surface-variant">Entrega</span>
+                            <span class="text-green-600 font-bold">Grátis</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-outline-variant pt-sm">
+                            <span class="font-bold text-primary">Total Geral</span>
+                            <span class="font-headline-sm text-headline-sm font-extrabold text-primary" id="checkout-total">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-md rounded-lg flex justify-center items-center gap-sm hover:translate-y-[-2px] transition-all active:scale-95 shadow-sm mt-md">
+                        <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                        Confirmar e Pagar
+                    </button>
+                    <button type="button" onclick="setView('list-detail')" class="w-full text-primary hover:underline font-button text-body-sm py-sm text-center">
+                        Voltar para a Lista
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- VIEW 4: SUCCESS (Simulated Payment QR Pix) -->
+        <div id="view-success" class="app-view hidden max-w-xl mx-auto bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant shadow-md text-center space-y-md">
+            <span class="material-symbols-outlined text-[64px] text-green-600 bg-green-50 p-4 rounded-full">check_circle</span>
+            
+            <h2 class="font-headline-lg text-headline-lg text-primary font-extrabold">Pedido Confirmado!</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Seu pedido <strong id="success-order-id" class="text-primary">LBOX-xxxx</strong> foi gerado no sistema com sucesso.</p>
+
+            <div id="pix-qr-container" class="bg-surface-container-low p-md rounded-xl space-y-sm hidden">
+                <p class="font-label-lg text-label-lg text-primary uppercase">Pagamento via Pix</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Escaneie o código Pix abaixo para realizar o pagamento simulado de <strong id="success-total">R$ 0,00</strong>.</p>
+                
+                <!-- Mock QR Code visual representation -->
+                <div class="w-48 h-48 bg-white mx-auto border-2 border-outline-variant flex items-center justify-center p-sm rounded">
+                    <img class="w-full h-full object-contain" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=listabox-simulated-payment-pix" alt="QR Code Pix">
+                </div>
+                <p class="text-[12px] text-on-surface-variant break-all font-mono select-all bg-white p-xs rounded border border-outline-variant">00020101021226830014br.gov.bcb.pix2561api.listabox.com/pix/qrcode/v2/58129371058</p>
+                <button onclick="alert('Código Pix copiado para a área de transferência!')" class="bg-primary text-on-primary px-sm py-xs rounded font-button text-[12px] hover:opacity-90">Copiar Código Pix</button>
+            </div>
+
+            <div class="pt-sm space-y-sm">
+                <button onclick="startOrderTracking()" class="w-full bg-primary text-on-primary font-button text-button py-md rounded-lg flex justify-center items-center gap-sm hover:translate-y-[-2px] transition-all active:scale-95">
+                    <span class="material-symbols-outlined">map</span> Acompanhar Entrega
+                </button>
+                <button onclick="setView('home'); renderHome();" class="w-full text-primary hover:underline font-button text-body-sm py-sm text-center">
+                    Voltar para a Página Inicial
+                </button>
+            </div>
+        </div>
+
+        <!-- VIEW 5: TRACKING (Order Tracking Panel) -->
+        <div id="view-tracking" class="app-view hidden max-w-2xl mx-auto bg-surface-container-lowest p-gutter rounded-2xl border border-outline-variant shadow-md space-y-lg">
+            <div class="flex justify-between items-center border-b border-outline-variant pb-sm">
+                <div>
+                    <h2 class="font-headline-sm text-headline-sm text-primary">Acompanhar Pedido</h2>
+                    <p class="text-body-sm text-on-surface-variant">Código: <strong id="track-order-id" class="text-primary">LBOX-xxxx</strong></p>
+                </div>
+                <button onclick="setView('home')" class="text-primary hover:underline text-body-sm flex items-center gap-xs">
+                    <span class="material-symbols-outlined">arrow_back</span> Voltar
+                </button>
+            </div>
+
+            <!-- Steps Progress Bar -->
+            <div class="grid grid-cols-4 relative pt-md">
+                
+                <!-- Received -->
+                <div class="flex flex-col items-center text-center space-y-sm z-10">
+                    <div id="track-step-received" class="w-10 h-10 rounded-full flex items-center justify-center font-bold bg-primary text-on-primary">
+                        <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                    </div>
+                    <span id="track-text-received" class="text-[12px] font-semibold text-primary">Pedido Recebido</span>
+                </div>
+                
+                <!-- Preparing -->
+                <div class="flex flex-col items-center text-center space-y-sm z-10">
+                    <div id="track-step-preparing" class="w-10 h-10 rounded-full flex items-center justify-center font-bold bg-outline text-surface-container">
+                        <span class="material-symbols-outlined text-[20px]">inventory</span>
+                    </div>
+                    <span id="track-text-preparing" class="text-[12px] text-on-surface-variant">Separando Materiais</span>
+                </div>
+
+                <!-- Shipping -->
+                <div class="flex flex-col items-center text-center space-y-sm z-10">
+                    <div id="track-step-shipping" class="w-10 h-10 rounded-full flex items-center justify-center font-bold bg-outline text-surface-container">
+                        <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                    </div>
+                    <span id="track-text-shipping" class="text-[12px] text-on-surface-variant">Em Transporte</span>
+                </div>
+
+                <!-- Delivered -->
+                <div class="flex flex-col items-center text-center space-y-sm z-10">
+                    <div id="track-step-delivered" class="w-10 h-10 rounded-full flex items-center justify-center font-bold bg-outline text-surface-container">
+                        <span class="material-symbols-outlined text-[20px]">home</span>
+                    </div>
+                    <span id="track-text-delivered" class="text-[12px] text-on-surface-variant">Entregue</span>
+                </div>
+
+                <!-- Horizontal lines background -->
+                <div class="absolute top-10 left-0 right-0 h-1 bg-outline-variant -z-0 grid grid-cols-3">
+                    <div id="track-line-preparing" class="h-full bg-outline-variant"></div>
+                    <div id="track-line-shipping" class="h-full bg-outline-variant"></div>
+                    <div id="track-line-delivered" class="h-full bg-outline-variant"></div>
+                </div>
+            </div>
+
+            <!-- Details Card -->
+            <div class="bg-surface-container p-md rounded-xl space-y-sm text-body-sm text-on-surface">
+                <h4 class="font-label-lg text-label-lg text-primary uppercase">Informações Gerais de Envio</h4>
+                <p><strong>Lista do Kit:</strong> <span id="track-school-grade">Colégio Anglo - Infantil</span></p>
+                <p><strong>Estudante:</strong> <span id="track-student">Lucas Souza</span></p>
+                <p><strong>Total Pago:</strong> <span id="track-total" class="font-bold text-primary">R$ 0,00</span></p>
+                <p><strong>Endereço de Entrega:</strong> <span id="track-address">Rua Exemplo, 123</span></p>
+                <p><strong>Data de Compra:</strong> <span id="track-date">10/06/2026</span></p>
+            </div>
+
+            <div class="text-center bg-primary-container/10 p-sm rounded-xl border border-primary/20">
+                <p class="font-body-sm text-body-sm text-primary">
+                    <strong class="font-bold">Aviso do Empreendedor:</strong> Para testar a mudança de status do pedido, acesse o <strong>Painel do Empreendedor</strong> no cabeçalho e altere a situação deste pedido lá!
+                </p>
+            </div>
+        </div>
+
+        <!-- VIEW 6: MERCHANT ADMIN (Dash & Inventory Manager) -->
+        <div id="view-admin" class="app-view hidden space-y-lg">
+            <div class="flex justify-between items-center border-b border-outline-variant pb-sm">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg text-primary font-extrabold">Painel do Empreendedor</h2>
+                    <p class="text-body-sm text-on-surface-variant">Gerencie suas listas de escolas, materiais e veja as compras dos pais.</p>
+                </div>
+                <button onclick="toggleAdminView()" class="bg-primary text-on-primary px-md py-sm rounded-lg font-button text-button hover:opacity-90">
+                    Sair do Painel
+                </button>
+            </div>
+
+            <!-- Admin Tab Selector -->
+            <div class="flex border-b border-outline-variant">
+                <button id="admin-tab-lists" onclick="setAdminTab('lists')" class="px-lg py-sm border-b-2 font-headline-sm text-headline-sm font-semibold transition-all">Listas de Material</button>
+                <button id="admin-tab-orders" onclick="setAdminTab('orders')" class="px-lg py-sm border-b-2 font-headline-sm text-headline-sm font-semibold transition-all">Pedidos Recebidos</button>
+            </div>
+
+            <!-- Tab content: Lists Manager -->
+            <div id="admin-lists-section" class="space-y-md">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-headline-sm text-headline-sm text-primary">Minhas Listas Cadastradas</h3>
+                    <button onclick="openAddListModal()" class="bg-primary text-on-primary px-md py-sm rounded-lg flex items-center gap-xs font-button text-button hover:opacity-95">
+                        <span class="material-symbols-outlined">add</span> Nova Lista
+                    </button>
+                </div>
+
+                <div id="admin-lists-container" class="grid grid-cols-1 gap-sm">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Tab content: Orders Tracker -->
+            <div id="admin-orders-section" class="hidden space-y-md">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Pedidos de Pais e Responsáveis</h3>
+                <div id="admin-orders-container" class="space-y-md">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ADMIN MODALS -->
+    <!-- Modal: Add New School List -->
+    <div id="admin-list-modal" class="fixed inset-0 bg-black/50 z-50 items-center justify-center hidden p-md">
+        <div class="bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant shadow-xl max-w-md w-full space-y-md">
+            <div class="flex justify-between items-center border-b border-outline-variant pb-xs">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Cadastrar Nova Lista</h3>
+                <button onclick="closeAddListModal()" class="material-symbols-outlined hover:bg-surface-variant rounded-full p-1 text-on-surface-variant">close</button>
+            </div>
+            <form onsubmit="handleAddListSubmit(event)" class="space-y-sm">
+                <div>
+                    <label class="block text-label-md font-bold text-primary mb-xs">Nome da Escola / Título da Lista</label>
+                    <input type="text" id="admin-add-title" required placeholder="Ex: Lista do 2º Ano - Objetivo" class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-body-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-sm">
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Escola Parceira</label>
+                        <select id="admin-add-school" class="w-full rounded-lg border-outline-variant text-body-sm"></select>
+                    </div>
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Série / Grade</label>
+                        <input type="text" id="admin-add-grade" required placeholder="Ex: 2º Ano" class="w-full rounded-lg border-outline-variant text-body-sm">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-sm">
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Ano Letivo</label>
+                        <input type="text" id="admin-add-year" required placeholder="Ex: 2026" class="w-full rounded-lg border-outline-variant text-body-sm">
+                    </div>
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Preço do Kit Sugerido</label>
+                        <input type="number" step="0.01" id="admin-add-price" required placeholder="250.00" class="w-full rounded-lg border-outline-variant text-body-sm">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg hover:opacity-95 shadow-sm mt-md">
+                    Criar Lista de Material
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Items in List -->
+    <div id="admin-edit-items-modal" class="fixed inset-0 bg-black/50 z-50 items-center justify-center hidden p-md">
+        <div class="bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant shadow-xl max-w-2xl w-full space-y-md max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-outline-variant pb-xs">
+                <h3 id="admin-edit-title" class="font-headline-sm text-headline-sm text-primary">Itens de: Lista</h3>
+                <button onclick="closeEditListModal()" class="material-symbols-outlined hover:bg-surface-variant rounded-full p-1 text-on-surface-variant">close</button>
+            </div>
+            
+            <!-- Items current list -->
+            <div class="space-y-sm">
+                <h4 class="font-label-lg text-label-lg text-primary uppercase">Itens Cadastrados</h4>
+                <div id="admin-items-list-container" class="space-y-xs max-h-48 overflow-y-auto border border-outline-variant p-sm rounded-lg bg-surface-container-low">
+                    <!-- Items populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Form to Add Item to this list -->
+            <form id="admin-item-form" onsubmit="handleAddItemSubmit(event)" class="space-y-sm border-t border-outline-variant pt-md">
+                <h4 class="font-label-lg text-label-lg text-primary uppercase">Adicionar Novo Material</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Nome do Item</label>
+                        <input type="text" id="admin-item-name" required placeholder="Ex: Caderno Universitário 10m" class="w-full rounded-lg border-outline-variant text-body-sm">
+                    </div>
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Preço Unitário (R$)</label>
+                        <input type="number" step="0.01" id="admin-item-price" required placeholder="15.50" class="w-full rounded-lg border-outline-variant text-body-sm">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-sm items-center">
+                    <div>
+                        <label class="block text-label-md font-bold text-primary mb-xs">Categoria</label>
+                        <select id="admin-item-category" class="w-full rounded-lg border-outline-variant text-body-sm">
+                            <option value="writing">Escrita (Lápis, caneta, etc)</option>
+                            <option value="art">Artes (Tinta, cartolina, etc)</option>
+                            <option value="notebook">Cadernos & Papéis</option>
+                            <option value="others">Outros / Diversos</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-sm mt-4">
+                        <input type="checkbox" id="admin-item-mandatory" checked class="w-5 h-5 rounded border-outline text-primary focus:ring-primary cursor-pointer">
+                        <label for="admin-item-mandatory" class="text-label-md font-bold text-primary cursor-pointer">Obrigatório</label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-label-md font-bold text-primary mb-xs">Descrição do Item</label>
+                    <input type="text" id="admin-item-desc" placeholder="Ex: Capa resistente, 96 folhas" class="w-full rounded-lg border-outline-variant text-body-sm">
+                </div>
+                <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg hover:opacity-95 shadow-sm">
+                    Adicionar Item à Lista
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar (Mobile only) -->
+    <nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-sm pb-md pt-sm bg-surface-container-lowest border-t border-outline-variant shadow-lg md:hidden">
+        <div onclick="setView('home')" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-200 cursor-pointer">
+            <span class="material-symbols-outlined">home</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </div>
+        <div onclick="openCartView()" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-200 cursor-pointer">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <span class="font-label-md text-label-md">Carrinho</span>
+        </div>
+        <div onclick="toggleAdminView()" class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-4 py-1 active:translate-y-[-2px] transition-all duration-200 cursor-pointer">
+            <span class="material-symbols-outlined">storefront</span>
+            <span class="font-label-md text-label-md">Painel</span>
+        </div>
+        <div onclick="if (state.trackingOrder) setView('tracking')" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-200 cursor-pointer">
+            <span class="material-symbols-outlined">map</span>
+            <span class="font-label-md text-label-md">Rastreio</span>
+        </div>
+    </nav>
+
+    <!-- Main Logic Script -->
+    <script src="app.js"></script>
+</body>
+</html>
