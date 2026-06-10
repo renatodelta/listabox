@@ -4,7 +4,8 @@
 const DEFAULT_SCHOOLS = [
     { id: "anglo", name: "Colégio Anglo" },
     { id: "objetivo", name: "Colégio Objetivo" },
-    { id: "montessori", name: "Escola Montessori" }
+    { id: "montessori", name: "Escola Montessori" },
+    { id: "sao-jose", name: "Instituto São José" }
 ];
 
 const DEFAULT_LISTS = [
@@ -145,6 +146,88 @@ const DEFAULT_LISTS = [
                 image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200"
             }
         ]
+    },
+    {
+        id: "sao-jose-maternal",
+        schoolId: "sao-jose",
+        grade: "Maternal (2 Anos)",
+        year: "2026",
+        title: "Lista do Maternal - Inst. São José",
+        description: "Módulo Básico Girolhar e materiais individuais/coletivos recomendados para crianças de 2 anos no Instituto São José.",
+        originalPrice: 574.60,
+        bundlePrice: 499.00,
+        image: "https://images.unsplash.com/photo-1564424224827-cd24b8914874?auto=format&fit=crop&q=80&w=600",
+        verified: true,
+        items: [
+            { id: "sjm-1", name: "Coleção Girolhar - Módulo Básico", category: "notebook", description: "Material didático básico adotado pela escola.", price: 180.00, mandatory: true, checked: true },
+            { id: "sjm-2", name: "Música - Quebrando a Casca - Maternal (Livro)", category: "notebook", description: "Livro de música para atividades em sala.", price: 45.00, mandatory: true, checked: true },
+            { id: "sjm-3", name: "Projeto - Para Sempre - Coleção Música em Família (Livro)", category: "notebook", description: "Material do projeto Música em Família.", price: 50.00, mandatory: true, checked: true },
+            { id: "sjm-4", name: "Caneta Hidrocor Grossa 12 cores - Jumbão (Faber Castell)", category: "writing", description: "Formato anatômico, ideal para mãozinhas de 2 anos.", price: 39.90, mandatory: true, checked: true },
+            { id: "sjm-5", name: "Ecogiz de Cera 12 cores + apontador (Faber Castell)", category: "writing", description: "Giz de cera macio com apontador.", price: 19.90, mandatory: true, checked: true },
+            { id: "sjm-6", name: "Cola Branca 110g (Tenaz)", category: "art", description: "Fórmula de alta aderência lavável.", price: 9.50, mandatory: true, checked: true },
+            { id: "sjm-7", name: "Cola em Bastão 40g (Pritt)", category: "art", description: "Secagem rápida, não enruga o papel.", price: 14.90, mandatory: true, checked: true },
+            { id: "sjm-8", name: "Tinta Guache em Bastão 10g - 6 cores Neon (Acrilex)", category: "art", description: "Cores neon vibrantes e de fácil aplicação.", price: 22.90, mandatory: true, checked: true },
+            { id: "sjm-9", name: "Aquarela Pastilha 12 cores (Acrilex/Faber)", category: "art", description: "Cores solúveis em água para atividades artísticas.", price: 18.50, mandatory: true, checked: true },
+            { id: "sjm-10", name: "Avental Infantil Impermeável com manga", category: "art", description: "Proteção completa para aulas de artes e pintura.", price: 29.90, mandatory: true, checked: true },
+            { id: "sjm-11", name: "Lupa Pequena", category: "others", description: "Para exploração e atividades ao ar livre.", price: 12.00, mandatory: true, checked: true },
+            { id: "sjm-12", name: "Lanterna Pequena com pilha", category: "others", description: "Ideal para atividades de luz e sombra.", price: 15.00, mandatory: true, checked: true },
+            { id: "sjm-13", name: "Lenços de papel (2 caixas)", category: "others", description: "Caixa com lenços de papel higiênico e macio.", price: 8.00, mandatory: true, checked: true },
+            { id: "sjm-14", name: "Lenços umedecidos (3 pacotes)", category: "others", description: "Lenços umedecidos para higiene individual do aluno.", price: 19.90, mandatory: true, checked: true },
+            { id: "sjm-15", name: "Pote de argilinha (Uti Guti)", category: "art", description: "Argila pronta para modelagem.", price: 7.90, mandatory: false, checked: false },
+            { id: "sjm-16", name: "Tintas Guache 250ml (2 unidades)", category: "art", description: "Garrafa com tinta guache escolar líquida.", price: 16.00, mandatory: false, checked: false },
+            { id: "sjm-17", name: "Potes de massa de modelar 500g (2 unidades)", category: "art", description: "Massa macia e colorida de 500g.", price: 24.90, mandatory: false, checked: false },
+            { id: "sjm-18", name: "Bloco de Papel Canson A3 branco (20 folhas)", category: "notebook", description: "Papel de alta gramatura para técnicas secas ou úmidas.", price: 22.90, mandatory: false, checked: false },
+            { id: "sjm-19", name: "Bloco de Papel Canson A3 colorido (20 folhas)", category: "notebook", description: "Bloco com folhas Canson coloridas sortidas.", price: 24.90, mandatory: false, checked: false },
+            { id: "sjm-20", name: "Sacos plásticos grossos A3 (10 unidades)", category: "others", description: "Sacos plásticos resistentes para guardar produções.", price: 12.00, mandatory: false, checked: false },
+            { id: "sjm-21", name: "Fitas crepe grossas (2 unidades)", category: "others", description: "Fita adesiva crepe para fixações diversas.", price: 15.00, mandatory: false, checked: false },
+            { id: "sjm-22", name: "Rolos de durex grosso (2 unidades)", category: "others", description: "Durex largo transparente.", price: 12.00, mandatory: false, checked: false },
+            { id: "sjm-23", name: "Refis de cola quente (grosso e fino)", category: "others", description: "Bastão de adesivo termoplástico.", price: 10.00, mandatory: false, checked: false },
+            { id: "sjm-24", name: "Esponja simples para pintura", category: "art", description: "Esponja multiuso para técnicas de textura.", price: 3.50, mandatory: false, checked: false }
+        ]
+    },
+    {
+        id: "sao-jose-infantil1",
+        schoolId: "sao-jose",
+        grade: "Infantil I (3 Anos)",
+        year: "2026",
+        title: "Lista do Infantil I - Inst. São José",
+        description: "Módulo Girolhar, Programa Bilíngue, Música e todos os materiais individuais e coletivos indicados para crianças de 3 anos.",
+        originalPrice: 865.90,
+        bundlePrice: 749.90,
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600",
+        verified: true,
+        items: [
+            { id: "sji-1", name: "Coleção Girolhar - Módulo Básico", category: "notebook", description: "Material básico oficial da rede Salesiana.", price: 180.00, mandatory: true, checked: true },
+            { id: "sji-2", name: "Livro Bilíngue: Welcome to Our World Bundle Level 1", category: "notebook", description: "Kit de inglês contendo Student Book + Activity Book.", price: 160.00, mandatory: true, checked: true },
+            { id: "sji-3", name: "Música - Quebrando a Casca - Volume 1 (Livro)", category: "notebook", description: "Material didático voltado para musicalização infantil.", price: 45.00, mandatory: true, checked: true },
+            { id: "sji-4", name: "Projeto: Para Sempre - Coleção Música em Família (Livro)", category: "notebook", description: "Livro com canções e atividades familiares.", price: 50.00, mandatory: true, checked: true },
+            { id: "sji-5", name: "Caneta Hidrocor 12 cores grossa - Jumbão (Faber)", category: "writing", description: "Hidrocor jumbo lavável, cores vivas.", price: 39.90, mandatory: true, checked: true },
+            { id: "sji-6", name: "Giz de Cera Retrátil (Acrilex)", category: "writing", description: "Mecanismo retrátil que evita a quebra do giz.", price: 24.90, mandatory: true, checked: true },
+            { id: "sji-7", name: "Lápis Grafite Triangular Jumbão (Faber)", category: "writing", description: "Facilita a empunhadura correta para escrita.", price: 6.50, mandatory: true, checked: true },
+            { id: "sji-8", name: "Apontador para Lápis Jumbão", category: "writing", description: "Lâmina afiada específica para bitola maior.", price: 8.90, mandatory: true, checked: true },
+            { id: "sji-9", name: "Cola Branca 500g (Tenaz)", category: "art", description: "Tubo grande de cola branca escolar.", price: 18.90, mandatory: true, checked: true },
+            { id: "sji-10", name: "Cola em Bastão 40g (Pritt)", category: "art", description: "Fórmula à base de amido, livre de solventes.", price: 14.90, mandatory: true, checked: true },
+            { id: "sji-11", name: "Avental Infantil Impermeável com manga", category: "art", description: "Protege o uniforme das tintas e colas.", price: 29.90, mandatory: true, checked: true },
+            { id: "sji-12", name: "Saquinho de Argilinha (Acrilex)", category: "art", description: "Argila escolar macia para trabalhos tridimensionais.", price: 7.90, mandatory: true, checked: true },
+            { id: "sji-13", name: "Guache Bastão 6 cores (Acrilex)", category: "art", description: "Tinta guache sólida, rápida secagem sem sujeira.", price: 22.90, mandatory: true, checked: true },
+            { id: "sji-14", name: "Rolinho de fita de cetim fina nº 3", category: "others", description: "Fita de cetim de cor variada.", price: 5.00, mandatory: true, checked: true },
+            { id: "sji-15", name: "Limpador de cachimbo colorido (10 un)", category: "others", description: "Hastes de metal flexíveis revestidas com pelúcia.", price: 8.00, mandatory: true, checked: true },
+            { id: "sji-16", name: "Lanterna Pequena com pilha", category: "others", description: "Equipamento para projetos de iluminação.", price: 15.00, mandatory: true, checked: true },
+            { id: "sji-17", name: "Massinha de modelar 6 cores (Bilíngue)", category: "art", description: "Massinha para o projeto bilíngue internacional.", price: 6.90, mandatory: true, checked: true },
+            { id: "sji-18", name: "Bloco de Papel Canson A3 branco (Bilíngue)", category: "notebook", description: "Canson para atividades artísticas bilíngues.", price: 22.90, mandatory: true, checked: true },
+            { id: "sji-19", name: "Bloco de Papel Canson A3 colorido (Bilíngue)", category: "notebook", description: "Canson colorido para atividades bilíngues.", price: 24.90, mandatory: true, checked: true },
+            { id: "sji-20", name: "Pasta catálogo com 50 plásticos (Bilíngue)", category: "notebook", description: "Para portfólio de atividades bilíngues.", price: 29.90, mandatory: true, checked: true },
+            { id: "sji-21", name: "Livro de História Infantil em inglês (Bilíngue)", category: "notebook", description: "Contos clássicos infantis em língua inglesa.", price: 35.00, mandatory: true, checked: true },
+            { id: "sji-22", name: "Bloco de papel Canson A3 colorido 20 folhas", category: "notebook", description: "Papel Canson colorido (Uso Coletivo).", price: 24.90, mandatory: false, checked: false },
+            { id: "sji-23", name: "Papel Criativo Colorido Color set A4", category: "notebook", description: "Pacote Color Set A4 (Uso Coletivo).", price: 15.90, mandatory: false, checked: false },
+            { id: "sji-24", name: "Bloco de papel Canson Branco A3 20 folhas", category: "notebook", description: "Papel Canson branco de 20 folhas (Uso Coletivo).", price: 22.90, mandatory: false, checked: false },
+            { id: "sji-25", name: "Massa de modelar 500g (Acrilex) (Coletivo)", category: "art", description: "Super bloco de massa de modelagem.", price: 14.90, mandatory: false, checked: false },
+            { id: "sji-26", name: "Tintas guache 250ml cores primárias (2 un)", category: "art", description: "Guaches líquidas (Uso Coletivo).", price: 16.00, mandatory: false, checked: false },
+            { id: "sji-27", name: "Rolinho para pintura (Coletivo)", category: "art", description: "Espuma para técnicas de pintura uniforme.", price: 6.00, mandatory: false, checked: false },
+            { id: "sji-28", name: "Trincha 2 polegadas (Coletivo)", category: "art", description: "Pincel largo para colorir grandes áreas.", price: 8.50, mandatory: false, checked: false },
+            { id: "sji-29", name: "Refis de cola quente (fino e grosso) (Coletivo)", category: "others", description: "Munição de cola térmica.", price: 10.00, mandatory: false, checked: false },
+            { id: "sji-30", name: "Pincel nº 20 (Coletivo)", category: "art", description: "Pincel de ponta redonda nº 20.", price: 7.50, mandatory: false, checked: false }
+        ]
     }
 ];
 
@@ -200,6 +283,28 @@ function initData() {
     state.lists = JSON.parse(localStorage.getItem("listabox_lists"));
     state.orders = JSON.parse(localStorage.getItem("listabox_orders"));
     
+    // Check and merge new defaults if missing
+    let updatedSchools = false;
+    if (!state.schools.some(s => s.id === "sao-jose")) {
+        state.schools.push({ id: "sao-jose", name: "Instituto São José" });
+        updatedSchools = true;
+    }
+    
+    let updatedLists = false;
+    DEFAULT_LISTS.forEach(l => {
+        if (l.schoolId === "sao-jose" && !state.lists.some(sl => sl.id === l.id)) {
+            state.lists.push(l);
+            updatedLists = true;
+        }
+    });
+
+    if (updatedSchools) {
+        saveData("listabox_schools", state.schools);
+    }
+    if (updatedLists) {
+        saveData("listabox_lists", state.lists);
+    }
+
     // Ensure cart state is fully initialized
     state.cart = {
         lists: [],
