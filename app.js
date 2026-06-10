@@ -16,71 +16,24 @@ const DEFAULT_LISTS = [
         year: "2026",
         title: "Lista do Infantil - Anglo",
         description: "Kit completo de materiais obrigatórios para o ano letivo de 2026. Aprovado pela coordenação pedagógica.",
-        originalPrice: 285.00,
-        bundlePrice: 249.90,
+        originalPrice: 256.50,
+        bundlePrice: 229.00,
         image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=600",
         verified: true,
         items: [
-            {
-                id: "item-1",
-                name: "Lápis de Cor Jumbo (12 cores)",
-                category: "writing",
-                description: "Formato triangular ergonômico, ideal para mãos pequenas.",
-                price: 42.90,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-2",
-                name: "Caderno de Desenho Espiral A3",
-                category: "art",
-                description: "Papel encorpado 120g, ideal para tintas e canetinhas.",
-                price: 31.50,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-3",
-                name: "Cola Bastão Não-Tóxica (3 un)",
-                category: "art",
-                description: "Fórmula livre de solventes, segura para crianças.",
-                price: 15.90,
-                mandatory: false,
-                checked: false,
-                image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-4",
-                name: "Canetinhas Hidrocor Laváveis (10 cores)",
-                category: "writing",
-                description: "Ponta grossa, fáceis de limpar da pele e tecidos.",
-                price: 28.00,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-5",
-                name: "Tesoura Sem Ponta (Infantil)",
-                category: "art",
-                description: "Lâminas de aço inox com cabo plástico ergonômico.",
-                price: 12.50,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-6",
-                name: "Massa de Modelar (6 cores)",
-                category: "art",
-                description: "Não resseca, base vegetal, cores super vibrantes.",
-                price: 18.90,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200"
-            }
+            { id: "item-1", name: "Lápis de Cor Jumbo (12 cores)", category: "writing", description: "Formato triangular ergonômico, ideal para mãos pequenas.", price: 42.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-2", name: "Caderno de Desenho Espiral A3", category: "art", description: "Papel encorpado 120g, ideal para tintas e canetinhas.", price: 31.50, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-3", name: "Cola Bastão Não-Tóxica (3 un)", category: "art", description: "Fórmula livre de solventes, segura para crianças.", price: 15.90, mandatory: false, checked: false, image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-4", name: "Canetinhas Hidrocor Laváveis (10 cores)", category: "writing", description: "Ponta grossa, fáceis de limpar da pele e tecidos.", price: 28.00, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-5", name: "Tesoura Sem Ponta (Infantil)", category: "art", description: "Lâminas de aço inox com cabo plástico ergonômico.", price: 12.50, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-6", name: "Massa de Modelar (6 cores)", category: "art", description: "Não resseca, base vegetal, cores super vibrantes.", price: 18.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-7", name: "Gibi para leitura (Turma da Mônica)", category: "others", description: "HQ infantil para incentivo à leitura.", price: 9.90, mandatory: false, checked: false, image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-8", name: "Pincel Chato nº 12", category: "art", description: "Ideal para têmpera guache e colagens.", price: 4.80, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-9", name: "Tinta Guache Acrilex (6 cores)", category: "art", description: "Têmpera guache escolar atóxica.", price: 11.50, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-10", name: "Pasta Aba Elástico Polionda A4", category: "notebook", description: "Pasta de plástico polionda com elástico.", price: 7.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-11", name: "Papel Criativo Colorset A4 (24 fls)", category: "notebook", description: "Papéis coloridos sortidos de alta gramatura.", price: 14.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-12", name: "Avental Escolar Impermeável", category: "others", description: "Avental para atividades artísticas.", price: 24.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-13", name: "Lenço Umedecido (Higiene)", category: "others", description: "Para higienização rápida das mãos.", price: 12.90, mandatory: false, checked: false, image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200" }
         ]
     },
     {
@@ -90,61 +43,26 @@ const DEFAULT_LISTS = [
         year: "2026",
         title: "Lista de 1º Ano - Objetivo",
         description: "Material oficial para ingresso no Ensino Fundamental. Foco em alfabetização e artes.",
-        originalPrice: 320.00,
-        bundlePrice: 289.90,
+        originalPrice: 268.00,
+        bundlePrice: 239.00,
         image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=600",
         verified: true,
         items: [
-            {
-                id: "item-obj-1",
-                name: "Lápis Preto Grafite HB (4 un)",
-                category: "writing",
-                description: "Grafite macio para as primeiras palavras escritas.",
-                price: 9.90,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-obj-2",
-                name: "Borracha Branca com Capa",
-                category: "writing",
-                description: "Livre de PVC, apaga sem borrar o papel.",
-                price: 6.50,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-obj-3",
-                name: "Caderno Brochura Pautado (96 fls)",
-                category: "notebook",
-                description: "Capa dura resistente na cor azul padrão.",
-                price: 18.90,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-obj-4",
-                name: "Avental Plástico para Pintura",
-                category: "art",
-                description: "Impermeável, ideal para aulas de artes.",
-                price: 24.90,
-                mandatory: false,
-                checked: false,
-                image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200"
-            },
-            {
-                id: "item-obj-5",
-                name: "Estojo Escolar Duplo",
-                category: "others",
-                description: "Zíper reforçado, espaçoso para guardar tudo.",
-                price: 35.00,
-                mandatory: true,
-                checked: true,
-                image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200"
-            }
+            { id: "item-obj-1", name: "Lápis Preto Grafite HB (4 un)", category: "writing", description: "Grafite macio para as primeiras palavras escritas.", price: 9.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-2", name: "Borracha Branca com Capa", category: "writing", description: "Livre de PVC, apaga sem borrar o papel.", price: 6.50, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-3", name: "Caderno Brochura Pautado (96 fls)", category: "notebook", description: "Capa dura resistente na cor azul padrão.", price: 18.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-4", name: "Avental Plástico para Pintura", category: "art", description: "Impermeável, ideal para aulas de artes.", price: 24.90, mandatory: false, checked: false, image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-5", name: "Estojo Escolar Duplo", category: "others", description: "Zíper reforçado, espaçoso para guardar tudo.", price: 35.00, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-6", name: "Lápis de Cor Faber-Castell (12 cores)", category: "writing", description: "Lápis de cor sextavados de excelente cobertura.", price: 29.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-7", name: "Apontador de Lápis com Depósito", category: "writing", description: "Evita sujeiras, lâmina de alta durabilidade.", price: 7.50, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-8", name: "Régua Plástica 30cm flexível", category: "writing", description: "Régua flexível inquebrável, ideal para crianças.", price: 5.50, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-9", name: "Tesoura Escolar Sem Ponta", category: "writing", description: "Lâmina com escala em centímetros, segura.", price: 9.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-10", name: "Cola Líquida Branca 90g (Tenaz)", category: "art", description: "Cola líquida ideal para colagens escolares.", price: 6.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-11", name: "Papel Sulfite A4 Branco (100 fls)", category: "notebook", description: "Papel sulfite branco 75g de alta qualidade.", price: 12.50, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-12", name: "Pasta Polionda com Alça e Elástico", category: "notebook", description: "Pasta maleta polionda com lombada de 2cm.", price: 15.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-13", name: "Caderno de Caligrafia Brochura (40 fls)", category: "notebook", description: "Pautas específicas para auxílio na escrita cursiva.", price: 9.90, mandatory: true, checked: true, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-14", name: "Dicionário Escolar da Língua Portuguesa", category: "notebook", description: "Minidicionário da língua portuguesa atualizado.", price: 24.90, mandatory: false, checked: false, image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200" },
+            { id: "item-obj-15", name: "Etiquetas Adesivas Personalizadas (Kit)", category: "others", description: "Kit com 30 etiquetas para identificação de materiais.", price: 19.90, mandatory: false, checked: false, image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=200" }
         ]
     },
     {
@@ -292,16 +210,14 @@ function initData() {
     
     let updatedLists = false;
     DEFAULT_LISTS.forEach(l => {
-        if (l.schoolId === "sao-jose") {
-            const idx = state.lists.findIndex(sl => sl.id === l.id);
-            if (idx > -1) {
-                // Force update the list to fix the missing image/items
-                state.lists[idx] = l;
-                updatedLists = true;
-            } else {
-                state.lists.push(l);
-                updatedLists = true;
-            }
+        const idx = state.lists.findIndex(sl => sl.id === l.id);
+        if (idx > -1) {
+            // Force update all default lists to sync their expanded items
+            state.lists[idx] = l;
+            updatedLists = true;
+        } else {
+            state.lists.push(l);
+            updatedLists = true;
         }
     });
 
