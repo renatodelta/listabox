@@ -156,7 +156,7 @@ const DEFAULT_LISTS = [
         description: "Módulo Básico Girolhar e materiais individuais/coletivos recomendados para crianças de 2 anos no Instituto São José.",
         originalPrice: 574.60,
         bundlePrice: 499.00,
-        image: "https://images.unsplash.com/photo-1564424224827-cd24b8914874?auto=format&fit=crop&q=80&w=600",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600",
         verified: true,
         items: [
             { id: "sjm-1", name: "Coleção Girolhar - Módulo Básico", category: "notebook", description: "Material didático básico adotado pela escola.", price: 180.00, mandatory: true, checked: true },
@@ -292,9 +292,16 @@ function initData() {
     
     let updatedLists = false;
     DEFAULT_LISTS.forEach(l => {
-        if (l.schoolId === "sao-jose" && !state.lists.some(sl => sl.id === l.id)) {
-            state.lists.push(l);
-            updatedLists = true;
+        if (l.schoolId === "sao-jose") {
+            const idx = state.lists.findIndex(sl => sl.id === l.id);
+            if (idx > -1) {
+                // Force update the list to fix the missing image/items
+                state.lists[idx] = l;
+                updatedLists = true;
+            } else {
+                state.lists.push(l);
+                updatedLists = true;
+            }
         }
     });
 
