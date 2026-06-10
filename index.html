@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000666">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registrado com sucesso:', reg))
+                    .catch(err => console.log('Falha ao registrar Service Worker:', err));
+            });
+        }
+    </script>
     
     <script id="tailwind-config">
         tailwind.config = {
@@ -192,8 +203,7 @@
             </div>
         </div>
 
-        <!-- VIEW 2: LIST DETAIL (Interactive Supply List) -->
-        <div id="view-list-detail" class="app-view hidden space-y-lg">
+         <div id="view-list-detail" class="app-view hidden space-y-lg">
             <!-- Breadcrumbs -->
             <nav class="flex items-center gap-xs text-on-surface-variant text-body-sm">
                 <span onclick="setView('home')" class="hover:underline cursor-pointer font-semibold">Home</span>
@@ -202,6 +212,16 @@
                 <span class="material-symbols-outlined text-[14px]">chevron_right</span>
                 <span class="font-bold text-primary" id="detail-breadcrumb-list">Lista</span>
             </nav>
+
+            <!-- Title & Description Header -->
+            <div class="space-y-xs pt-xs border-b border-outline-variant pb-sm">
+                <h2 class="font-headline-lg text-headline-lg text-primary font-extrabold" id="detail-title">Nome da Lista</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl" id="detail-desc">Breve descrição da lista escolar carregada.</p>
+                <div class="flex items-center gap-xs mt-sm text-body-sm text-on-surface-variant font-semibold">
+                    <span class="material-symbols-outlined text-[18px]">inventory_2</span>
+                    <span id="detail-item-count-badge">Carregando itens...</span>
+                </div>
+            </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
                 <!-- Left Column: Media & List Items -->
@@ -271,37 +291,11 @@
                 <!-- Right Column: Buying Cards -->
                 <div class="lg:col-span-5 space-y-md sticky top-[80px]">
                     
-                    <!-- Buy Full Bundle Card -->
-                    <div class="bg-surface-container-lowest p-gutter rounded-xl shadow-md border border-outline-variant relative overflow-hidden">
-                        <div class="absolute -top-4 -right-4 bg-secondary-container text-on-secondary-container py-2 px-6 rotate-12 font-bold text-[12px] shadow-sm">
-                            MELHOR PREÇO
-                        </div>
-                        <div class="mb-md">
-                            <h2 class="font-headline-md text-headline-md text-primary mb-xs" id="detail-title">Nome da Lista</h2>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant" id="detail-desc">Breve descrição da lista escolar carregada.</p>
-                        </div>
-                        <div class="space-y-sm mb-lg">
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Preço do Kit Completo</p>
-                                    <p class="font-headline-lg text-headline-lg text-primary font-extrabold" id="detail-bundle-price">R$ 0,00</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-body-sm text-body-sm text-red-500 line-through" id="detail-original-price">R$ 0,00</p>
-                                    <p class="font-label-lg text-label-lg text-tertiary-container bg-tertiary/10 px-sm py-xs rounded font-bold" id="detail-savings-badge">Economize 12%</p>
-                                </div>
-                            </div>
-                            <div class="bg-surface-container p-sm rounded-lg flex items-center gap-sm">
-                                <span class="material-symbols-outlined text-on-secondary-container">inventory_2</span>
-                                <p class="font-body-sm text-body-sm text-on-surface" id="detail-item-count-badge">Carregando itens...</p>
-                            </div>
-                        </div>
-                        <div class="space-y-sm">
-                            <button onclick="buyBundle()" class="w-full bg-primary text-on-primary font-button text-button py-md rounded-lg flex justify-center items-center gap-sm hover:bg-primary-container transition-all active:scale-95 shadow-sm">
-                                <span class="material-symbols-outlined">shopping_cart_checkout</span>
-                                Comprar Kit Completo com Desconto
-                            </button>
-                        </div>
+                    <!-- Hidden elements for JS compatibility -->
+                    <div class="hidden">
+                        <span id="detail-original-price"></span>
+                        <span id="detail-bundle-price"></span>
+                        <span id="detail-savings-badge"></span>
                     </div>
 
                     <!-- Custom Total Sticky Bar -->
